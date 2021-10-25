@@ -36,6 +36,15 @@ const gHome = (req, res) => {
     res.json(randomJson);
   }
 
+//exports.RandomJson = (req, res) => {
+   // var randomJson = []
+    //while(randomJson.length < 1000) {
+        //data = CreateRandomJson()
+        //randomJson.push(data)
+    //}
+    //res.json(randomJson);
+//};
+
 
 app.get('/', gHome);
 
