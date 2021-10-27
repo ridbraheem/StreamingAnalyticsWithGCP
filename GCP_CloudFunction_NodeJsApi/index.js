@@ -37,7 +37,7 @@ const CreateRandomJson = () => {
 
 exports.RandomJson = async (req, res) => {
      
-    const topic = pubsub.topic(req.body.topic);
+    const topic = pubsub.topic(<PubSub Topic Name>);
      
     var randomJson = []
     
