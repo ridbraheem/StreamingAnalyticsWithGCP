@@ -35,35 +35,44 @@ const CreateRandomJson = () => {
  //   res.json(randomJson);
  // }
 
-exports.RandomJson = async (req, res) => {
+exports.RandomJson = (req, res) => {
      
-    const topic = pubsub.topic(<PubSub Topic Name>);
+    const topic = pubsub.topic('get_emp_activity');
      
-    var randomJson = []
+    //var randomJs = []
     
-    while(randomJson.length < 1000) {
-        data = CreateRandomJson()
-        randomJson.push(data)
+    //while(randomJs.length < 1000) {
+    //  var d = CreateRandomJson()
+    //  randomJs.push(d)
+    //}
+
+    var inter = setInterval(() => 
+        publishToPubSub(), 1000);
+        setTimeout(() => clearInterval(inter), 3000);
+
+    const publishToPubSub = () => {
+        var d = CreateRandomJson()
+        console.log(d)
+
+    // setTimeout(publishToPubSub, 5000);
+    
+    
+
+      const messageBuffer = Buffer.from(JSON.stringify(d), 'utf8');
+      
+      //Publishes a message
+      try {
+          topic.publish(messageBuffer);
+          res.status(200).send('Message published.');
+      } catch (err) {
+          console.error(err);
+          res.status(500).send(err);
+          return Promise.reject(err);
+      }
     }
-    // res.json(randomJson);
-    const messageObject = {
-      data: {
-          message: randomJson,
-      },
-    };
-    
-    const messageBuffer = Buffer.from(JSON.stringify(messageObject), 'utf8');
-    
-       // Publishes a message
-    try {
-         await topic.publish(messageBuffer);
-         res.status(200).send('Message published.');
-    } catch (err) {
-         console.error(err);
-         res.status(500).send(err);
-         return Promise.reject(err);
-    }
-     
+
+
+
 };
 
 
