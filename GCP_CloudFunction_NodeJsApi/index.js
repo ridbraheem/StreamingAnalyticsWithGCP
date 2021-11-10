@@ -1,82 +1,43 @@
 // jshint esversion: 6
 'use strict';
-// const express = require("express");
 const _ = require('lodash');
 const {Act,Obj,Pro} = require('./Staticdata'); // Import Static data
 const {PubSub} = require('@google-cloud/pubsub'); // [START functions_pubsub_publish]
+const moment = require('moment');
 
-//const app = express();
+
 const pubsub = new PubSub();  // Instantiates a client
-
-var current_time = new Date();
-var hourago = new Date(current_time.getTime() - (1000*60*60));
-
-const randomDate = (start, end) => {
-    return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
-  }
-
 
 const CreateRandomJson = () => {
     var randomJ = {
         "activity" : _.sample(Act),
         "object" : _.sample(Obj),
         "profile" : _.sample(Pro),
-        "time" : randomDate(hourago,current_time)
+        "time" : moment().format('Y-M-D H:m:s')
     }
     return randomJ
 };
 
-//const gHome = (req, res) => {
-    //var randomJson = []
-   // while(randomJson.length < 1000) {
-      //  data = CreateRandomJson()
-      //  randomJson.push(data)
-  //  }
- //   res.json(randomJson);
- // }
+const topic = pubsub.topic('get_emp_activity');
 
-exports.RandomJson = (req, res) => {
-     
-    const topic = pubsub.topic('get_emp_activity');
-     
-    //var randomJs = []
-    
-    //while(randomJs.length < 1000) {
-    //  var d = CreateRandomJson()
-    //  randomJs.push(d)
-    //}
+const publishToPubSub = () => {
+    var d = CreateRandomJson()
 
-    var inter = setInterval(() => 
-        publishToPubSub(), 1000);
-        setTimeout(() => clearInterval(inter), 3000);
-
-    const publishToPubSub = () => {
-        var d = CreateRandomJson()
-        console.log(d)
-
-    // setTimeout(publishToPubSub, 5000);
-    
-    
-
-      const messageBuffer = Buffer.from(JSON.stringify(d), 'utf8');
+    const messageBuffer = Buffer.from(JSON.stringify(d), 'utf8');
       
-      //Publishes a message
-      try {
-          topic.publish(messageBuffer);
-          res.status(200).send('Message published.');
-      } catch (err) {
-          console.error(err);
-          res.status(500).send(err);
-          return Promise.reject(err);
+    //Publishes a message
+    try {
+        topic.publish(messageBuffer);
+        console.log('Message published.');
+        console.log(d)
+    } catch (err) {
+        console.log(err);
       }
-    }
+     setTimeout(publishToPubSub, 5000);
+}
 
+publishToPubSub()
 
-
-};
-
-
-// app.get('/', gHome);
-
-// app.listen(process.env.PORT || 3000, function() {
- // });
+//var inter = setInterval(() => 
+    //publishToPubSub(), 1000);
+    //setTimeout(() => clearInterval(inter), 3000);
