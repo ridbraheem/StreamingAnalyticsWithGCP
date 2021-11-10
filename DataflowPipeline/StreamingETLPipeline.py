@@ -9,13 +9,13 @@ import apache_beam as beam
 from apache_beam.options.pipeline_options import PipelineOptions
 import apache_beam.transforms.window as window
 
-PROJECT = "rapid-gadget-330102"
+PROJECT = "PROJECT NAME"
 
-TOPIC = "projects/rapid-gadget-330102/topics/get_emp_activity"
+TOPIC = "projects/PROJECT NAME/topics/TOPIC NAME"
 
-raw_activity_table = "rapid-gadget-330102:emp_tool_tracking.raw_activity_table" 
+raw_activity_table = "PROJECT NAME:DATASET.raw_activity_table" 
 
-activity_summary_table = "rapid-gadget-330102:emp_tool_tracking.activity_summary_table"
+activity_summary_table = "PROJECT NAME:DATASET.activity_summary_table"
 
 
 
