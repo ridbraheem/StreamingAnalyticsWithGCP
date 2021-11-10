@@ -18,7 +18,7 @@ const CreateRandomJson = () => {
     return randomJ
 };
 
-const topic = pubsub.topic('get_emp_activity');
+const topic = pubsub.topic(<TOPIC NAME>);
 
 const publishToPubSub = () => {
     var d = CreateRandomJson()
@@ -38,6 +38,4 @@ const publishToPubSub = () => {
 
 publishToPubSub()
 
-//var inter = setInterval(() => 
-    //publishToPubSub(), 1000);
-    //setTimeout(() => clearInterval(inter), 3000);
+
