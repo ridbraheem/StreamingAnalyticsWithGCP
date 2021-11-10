@@ -106,8 +106,8 @@ def run(
                     eventTimeMinutes.split(",")[1]: count 
                 }
             )
-			|"Convert to List" >> beam.CombineGlobally(beam.combiners.ToListCombineFn()).without_defaults()
-			|"Pivot and Remove Null" >> beam.ParDo(PivotandRemoveNull())
+	    |"Convert to List" >> beam.CombineGlobally(beam.combiners.ToListCombineFn()).without_defaults()
+	    |"Pivot and Remove Null" >> beam.ParDo(PivotandRemoveNull())
         )
         SummaryToBigquery = ObjectSummary |"Write Summary to Big Query" >> beam.io.WriteToBigQuery(activity_summary_table, schema=ACTIVITY_SUMMARY_SCHEMA, write_disposition=beam.io.BigQueryDisposition.WRITE_APPEND)
 
