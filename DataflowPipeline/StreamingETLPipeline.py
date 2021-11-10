@@ -37,9 +37,9 @@ RAW_SCHEMA = ",".join(
         "username:STRING",
         "team:STRING",
         "location:STRING",
-		"eventTime:STRING",
-		"eventTimeMinutes:STRING",
-		"processingTime:TIMESTAMP"
+	"eventTime:STRING",
+	"eventTimeMinutes:STRING",
+	"processingTime:TIMESTAMP"
 		
     ]
 )
