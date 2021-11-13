@@ -16,4 +16,10 @@ https://medium.com/@ridwanibraheem1/streaming-data-processing-using-google-cloud
 
 <img src="DataflowPipeline/DataPipeline.png" />
 
+## Streaming Visuals
+
+<img src="DataflowPipeline/Streaming Visuals.png" />
+
+
+
 
