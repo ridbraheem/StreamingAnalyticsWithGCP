@@ -11,3 +11,9 @@ https://medium.com/@ridwanibraheem1/streaming-data-processing-using-google-cloud
 ## Architecture Diagram 
 
 <img src="DataflowPipeline/Architecture Diagram.png" /> 
+
+## Data Pipeline
+
+<img src="DataflowPipeline/DataPipeline.png" />
+
+
